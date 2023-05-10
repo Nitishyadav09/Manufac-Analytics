@@ -5,7 +5,7 @@
 ### `Remember node,yarn should be previously installed in your machine.`
 ### `1. Download the file to the Desktop` 
 ### `2. Open the command prompt`
-### `3. cd Desktop/manufac-assignment`
+### `3. cd Desktop/Manufac-Analytics-main`
 ### `4. yarn start`
 ## 1. In first table we have to find mean,median and mode of the "Flavanoids"
 
