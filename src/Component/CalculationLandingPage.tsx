@@ -28,25 +28,26 @@ const CalculationLandingPage:React.FC<CalculationLandingPageI>=(props)=>{
   const getAlcoholDistinctList:any=new Set(Data?.map((item:Wine)=>{return item?.["Alcohol"]}));
   const getAlcoholList:number[]=[...getAlcoholDistinctList];
    
-  // function to find mean of gamma
+  // function to find mean of Flavanoids
     const getFlavanoidsMean=(dataSet: Wine[])=>{
        const TotalFlavanoids:number = dataSet?.reduce((initial:number,item:Wine)=>{return initial+Number(item?.["Flavanoids"])},0)
        return (TotalFlavanoids/(dataSet?.length)).toFixed(3);
       }
      
-   // function to find median of gamma 
+   // function to find median of Flavanoids 
     const getFlavanoidsMedian=(dataSet: Wine[])=>{
         const ListFlavanoids:number[] = dataSet?.map((item:Wine)=> Number(item?.Flavanoids));
         const soredDataSet = ListFlavanoids?.sort((a:number,b:number)=> a-b);
-        if(soredDataSet?.length % 2 === 0){
-           return ((soredDataSet[soredDataSet.length / 2] + soredDataSet[(soredDataSet.length / 2) - 1]) / 2).toFixed(3);
-        }
-        else{
-            return Number(soredDataSet[Math.ceil(soredDataSet.length/2)]).toFixed(3);
-        }
+        const middleIndex = Math.floor(soredDataSet.length / 2);
+   // If the array has an odd number of elements, the median is the middle element
+        if (soredDataSet.length % 2 === 1) {
+           return Number(soredDataSet[middleIndex]).toFixed(3);
+         }
+   // If the array has an even number of elements, the median is the average of the middle two elements
+        return (soredDataSet[middleIndex - 1] + soredDataSet[middleIndex]) / 2;
        }
 
-// function to find mode of gamma
+// function to find mode of Flavanoids
        const getFlavanoidsMode=(dataSet: Wine[])=>{
           // Create an empty object to store the frequency count of each Flavanoids value
             const flavanoidsCount:any = {};
@@ -89,12 +90,13 @@ const CalculationLandingPage:React.FC<CalculationLandingPageI>=(props)=>{
      const getGammaMedian=(dataSet: Wine[])=>{
          const ListGamma:number[] = dataSet?.map((item:Wine)=> (Number(item?.["Ash"])*Number(item?.["Hue"]))/Number(item?.["Magnesium"]));
          const soredDataSet = ListGamma?.sort((a:number,b:number)=> a-b);
-         if(soredDataSet?.length % 2 === 0){
-            return ((soredDataSet[soredDataSet.length / 2] + soredDataSet[(soredDataSet.length / 2) - 1]) / 2).toFixed(3);
+         const middleIndex = Math.floor(soredDataSet.length / 2);
+   // If the array has an odd number of elements, the median is the middle element
+        if (soredDataSet.length % 2 === 1) {
+           return Number(soredDataSet[middleIndex]).toFixed(3);
          }
-         else{
-             return (soredDataSet[Math.ceil((soredDataSet?.length/2))]).toFixed(3);
-         }
+   // If the array has an even number of elements, the median is the average of the middle two elements
+        return Number((soredDataSet[middleIndex - 1] + soredDataSet[middleIndex]) / 2).toFixed(3);
         }
       
       // function to find mode of gamma
