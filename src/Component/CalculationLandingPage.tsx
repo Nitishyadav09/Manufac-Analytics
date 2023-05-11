@@ -31,7 +31,7 @@ const CalculationLandingPage:React.FC<CalculationLandingPageI>=(props)=>{
   // function to find mean of gamma
     const getFlavanoidsMean=(dataSet: Wine[])=>{
        const TotalFlavanoids:number = dataSet?.reduce((initial:number,item:Wine)=>{return initial+Number(item?.["Flavanoids"])},0)
-       return (TotalFlavanoids/(Data.length)).toFixed(3);
+       return (TotalFlavanoids/(dataSet?.length)).toFixed(3);
       }
      
    // function to find median of gamma 
