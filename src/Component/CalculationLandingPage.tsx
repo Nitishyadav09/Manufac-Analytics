@@ -82,7 +82,7 @@ const CalculationLandingPage:React.FC<CalculationLandingPageI>=(props)=>{
     // function to find mean of gamma
     const getGammaMean=(dataSet: Wine[])=>{
         const TotalGamma:number = dataSet?.reduce((initial:number,item:Wine)=>{return initial+(Number(item?.["Ash"])*Number(item?.["Hue"]))/Number(item?.["Magnesium"])},0)
-        return (TotalGamma/(Data.length)).toFixed(3);
+        return (TotalGamma/(dataSet.length)).toFixed(3);
        }
      
     // function to find median of gamma
