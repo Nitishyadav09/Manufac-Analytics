@@ -49,32 +49,29 @@ const CalculationLandingPage:React.FC<CalculationLandingPageI>=(props)=>{
 
 // function to find mode of Flavanoids
        const getFlavanoidsMode=(dataSet: Wine[])=>{
-          // Create an empty object to store the frequency count of each Flavanoids value
-            const flavanoidsCount:any = {};
-            
-            
-            // Iterate over each object in the data array and increment the count for the corresponding Flavanoids value
-            dataSet.forEach((wine) => {
-              const flavanoids:number = Number(wine["Flavanoids"]);
-              if (flavanoidsCount.hasOwnProperty(flavanoids)) {
-                flavanoidsCount[flavanoids]++;
-              } else {
-                flavanoidsCount[flavanoids] = 1;
-              }
-            });
-            
-            // Find the Flavanoids value with the highest frequency count
-            let mode = null;
-            let modeCount = 0;
-            Object.keys(flavanoidsCount).forEach((flavanoids) => {
-              const count = flavanoidsCount[flavanoids];
-              if (count > modeCount) {
-                mode = flavanoids;
-                modeCount = count;
-              }
-            });
-            
-            return Number(mode).toFixed(3);
+         // Create an empty object to store the frequency count of each Flavanoids value
+          const flavanoidsCount:any = {};
+          const ListFlavanoids:number[] = dataSet?.map((item:Wine)=> Number(item?.Flavanoids));
+          // Loop through the array of data and count the number of occurrences of each value
+          ListFlavanoids.forEach((value:number) => {
+            if (value in flavanoidsCount) {
+              flavanoidsCount[value]++;
+            } else {
+              flavanoidsCount[value] = 1;
+            }
+          });
+        
+          // Find the value with the highest count
+          let mode:any;
+          let maxCount:number = 0;
+          for (const value in flavanoidsCount) {
+            if (flavanoidsCount[value] > maxCount) {
+              mode = value;
+              maxCount = flavanoidsCount[value];
+            }
+          }
+        
+          return Number(mode).toFixed(3);
         
        }
     
@@ -99,42 +96,37 @@ const CalculationLandingPage:React.FC<CalculationLandingPageI>=(props)=>{
         return Number((soredDataSet[middleIndex - 1] + soredDataSet[middleIndex]) / 2).toFixed(3);
         }
       
-      // function to find mode of gamma
+   // function to find mode of gamma
+  
         const getGammaMode=(dataSet: Wine[])=>{
-           // Create an empty object to store the frequency count of each Flavanoids value
-             const gammasCount:any = {};
-             
-             
-             // Iterate over each object in the data array and increment the count for the corresponding Flavanoids value
+          // Create an object to store the count of each unique value
+          const gammasCount:any = {};
+
+          // Iterate over each object in the data array and increment the count for the corresponding Flavanoids value
             
-             const ListGamma:number[] = dataSet?.map((item:Wine)=> (Number(item?.["Ash"])*Number(item?.["Hue"]))/Number(item?.["Magnesium"]));
-
-             dataSet.forEach((wine) => {
-               const gammas:number = (Number(wine["Flavanoids"]) * Number(wine["Hue"]))/(Number(wine["Magnesium"]));
-               console.log(gammasCount,"gammasCount")
-               if (gammasCount.hasOwnProperty(gammas)) {
-                
-                 gammasCount[gammas]++;
-               } else {
-                 gammasCount[gammas] = 1;
-               }
-             });
-             
-             // Find the Flavanoids value with the highest frequency count
-             let mode = null;
-             let modeCount = 0;
-             Object.keys(gammasCount).forEach((gammas) => {
-               const count = gammasCount[gammas];
-               if (count > modeCount) {
-                 mode = gammas;
-                 modeCount = count;
-               }
-             });
-             
-             return Number(mode).toFixed(3);
-         
+          const ListGamma:number[] = dataSet?.map((item:Wine)=> (Number(item?.["Ash"])*Number(item?.["Hue"]))/Number(item?.["Magnesium"]));
+        
+          // Loop through the array of data and count the number of occurrences of each value
+          ListGamma.forEach((value:number) => {
+            if (value in gammasCount) {
+              gammasCount[value]++;
+            } else {
+              gammasCount[value] = 1;
+            }
+          });
+        
+          // Find the value with the highest count
+          let mode:any;
+          let maxCount:number = 0;
+          for (const value in gammasCount) {
+            if (gammasCount[value] > maxCount) {
+              mode = value;
+              maxCount = gammasCount[value];
+            }
+          }
+        
+          return Number(mode).toFixed(3);
         }
-
         // function to filter data first acc. to alcohol class and then call releavant mean,median & mode functions.
        
         const filterRelevantData=(itemNumber:number,type:string)=>{
